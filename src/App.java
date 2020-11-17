@@ -8,8 +8,6 @@ import static java.lang.System.exit;
 public class App {
 
     public static void main(String[] args) {
-
-        
         menu();
     }
 
@@ -186,8 +184,8 @@ public class App {
                     while ((s = abc.readLine()) != null) {
                         String[] elements = s.split(",");
 
-                        tl.newAdd(new TaskItem(elements[0],elements[1],elements[2],Boolean.parseBoolean(elements[3])));
-submenu(loadList, tl);
+                        tl.newAdd(new TaskItem(elements[0], elements[1], elements[2], Boolean.parseBoolean(elements[3])));
+                        submenu(loadList, tl);
                     }
 
                     abc.close();
@@ -197,7 +195,6 @@ submenu(loadList, tl);
                     System.out.println("Returning to menu...");
                     menu();
                 }
-
 
 
             }
@@ -304,7 +301,6 @@ submenu(loadList, tl);
                                     } else if (deleteChoice == 2) {
                                         System.out.println("Returning to sub menu...");
                                         break;
-
                                     }
                                 }
                             } else {
@@ -314,13 +310,7 @@ submenu(loadList, tl);
                         } catch (IndexOutOfBoundsException e) {
                             System.out.println("Enter a valid index");
                         }
-                        // yes or no
-                        // if yes ask for index
-                        // getIndex();
                         //delete a whole task index PERIODT
-                        // back to sub menu
-                        // if no
-                        // back to sub menu
                         break;
                     case 5:
                         int markChoice = 0;
@@ -399,12 +389,6 @@ submenu(loadList, tl);
                         System.out.println("File created successfully");
                         break;
                     case 8:
-                        // I think at the end of the day Ke$ha is a strong person.
-                        // Also Zoey101 did not age well.
-                        // Also Tori was untalented and tried to be problematic in Victorious
-                        // I think the addition of pendulum monsters in yugioh was too much and the fact that they banned cards every other week is disgusting
-                        // Digimon held more meaning than pokemon, but at the end of the day pokemon had better episodes when it revolved around legendary pokemon
-                        // I Lost my sanity doing this project
                         menu();
                         // back to menu
                         break;
@@ -480,5 +464,12 @@ submenu(loadList, tl);
         return taskName;
     }
 
+
+    // I think at the end of the day Ke$ha is a strong person.
+    // Also Zoey101 did not age well.
+    // Also Tori was untalented and tried to be problematic in Victorious
+    // I think the addition of pendulum monsters in yugioh was too much and the fact that they banned cards every other week is disgusting
+    // Digimon held more meaning than pokemon, but at the end of the day pokemon had better episodes when it revolved around legendary pokemon
+    // I Lost my sanity doing this project
 }
 
