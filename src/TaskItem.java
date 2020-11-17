@@ -65,12 +65,8 @@ public class TaskItem implements Serializable {
     @Override
     public String toString() {
         return
+title + "," + description + "," + dueDate + "," + absoluteStatus();
 
-                        "Name...: " + title + "\n" +
-                        "Description...: " + description + "\n" +
-                        "Due date...: " + dueDate + "\n" +
-                        "Status...: " + absoluteStatus() + "\n"
 
-                ;
     }
 }

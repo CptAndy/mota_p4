@@ -1,7 +1,4 @@
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,7 +9,7 @@ public class App {
 
     public static void main(String[] args) {
 
-        String fileName = "";
+        
         menu();
     }
 
@@ -69,11 +66,13 @@ public class App {
                 fileChoice = input.nextInt();
                 switch (fileChoice) {
                     case 1:
+                        TaskList tl = new TaskList();
+
                         //asks for file name
                         //if the file exists asks again
                         //if the file name does not exist go to a submenu
                         ;
-                        submenu(loadList());
+                        submenu(loadList(), tl);
                         break;
                     case 2:
                         menu();
@@ -110,11 +109,13 @@ public class App {
                 fileChoice = input.nextInt();
                 switch (fileChoice) {
                     case 1:
+                        TaskList tl = new TaskList();
+
                         //asks for file name
                         //if the file exists asks again
                         //if the file name does not exist go to a submenu
                         ;
-                        submenu(createList());
+                        submenu(createList(), tl);
                         break;
                     case 2:
                         menu();
@@ -186,7 +187,7 @@ public class App {
                         String[] elements = s.split(",");
 
                         tl.newAdd(new TaskItem(elements[0],elements[1],elements[2],Boolean.parseBoolean(elements[3])));
-
+submenu(loadList, tl);
                     }
 
                     abc.close();
@@ -206,9 +207,9 @@ public class App {
         return loadList;
     }
 
-    private static void submenu(String fileName) {
+    private static void submenu(String fileName, TaskList tl) {
 
-        TaskList list = new TaskList();
+
         int fileChoice = 0;
         Scanner input = new Scanner(System.in);
 //Create a file?
@@ -241,18 +242,18 @@ public class App {
                 switch (subChoice) {
 
                     case 1:
-                        list.print();
+                        tl.print();
                         break;
                     case 2:
                         TaskItem task = new TaskItem(getTaskName(), getTaskDescription(), getTaskDueDate(), false); // Automatically set to incomplete
-                        list.newAdd(task);
+                        tl.newAdd(task);
                         // back to submenu
                         break;
                     case 3:
                         int updateChoice = 0;
 
                         try {
-                            if (list.getSize() > 0) {
+                            if (tl.getSize() > 0) {
                                 while (updateChoice != 4) {
                                     System.out.println("--- Editing Tasks Menu---");
                                     System.out.println(" ");
@@ -264,11 +265,11 @@ public class App {
                                     updateChoice = input.nextInt();
 
                                     if (updateChoice == 1) {
-                                        list.updateTitle(getIndex(), getTaskName());
+                                        tl.updateTitle(getIndex(), getTaskName());
                                     } else if (updateChoice == 2) {
-                                        list.updateDescription(getIndex(), getTaskDescription());
+                                        tl.updateDescription(getIndex(), getTaskDescription());
                                     } else if (updateChoice == 3) {
-                                        list.updateDuedate(getIndex(), getTaskDueDate());
+                                        tl.updateDuedate(getIndex(), getTaskDueDate());
                                     } else if (updateChoice == 4) {
                                         System.out.println("Returning to sub menu...");
                                         break;
@@ -288,7 +289,7 @@ public class App {
                         int deleteChoice = 0;
 
                         try {
-                            if (list.getSize() > 0) {
+                            if (tl.getSize() > 0) {
                                 while (deleteChoice != 4) {
                                     System.out.println("--- Delete Task Menu---");
                                     System.out.println(" ");
@@ -299,7 +300,7 @@ public class App {
                                     deleteChoice = input.nextInt();
 
                                     if (deleteChoice == 1) {
-                                        list.deleteTask(getIndex());
+                                        tl.deleteTask(getIndex());
                                     } else if (deleteChoice == 2) {
                                         System.out.println("Returning to sub menu...");
                                         break;
@@ -325,7 +326,7 @@ public class App {
                         int markChoice = 0;
 
                         try {
-                            if (list.getSize() > 0) {
+                            if (tl.getSize() > 0) {
                                 while (markChoice != 4) {
                                     System.out.println("--- Mark as Complete---");
                                     System.out.println(" ");
@@ -336,7 +337,7 @@ public class App {
                                     markChoice = input.nextInt();
 
                                     if (markChoice == 1) {
-                                        list.setComplete(true, getIndex());
+                                        tl.setComplete(true, getIndex());
 
                                     } else if (markChoice == 2) {
 
@@ -362,7 +363,7 @@ public class App {
                         int unmarkChoice = 0;
 
                         try {
-                            if (list.getSize() > 0) {
+                            if (tl.getSize() > 0) {
                                 while (unmarkChoice != 4) {
                                     System.out.println("--- Mark as Incomplete---");
                                     System.out.println(" ");
@@ -373,7 +374,7 @@ public class App {
                                     unmarkChoice = input.nextInt();
 
                                     if (unmarkChoice == 1) {
-                                        list.setComplete(false, getIndex());
+                                        tl.setComplete(false, getIndex());
                                     } else if (unmarkChoice == 2) {
                                         System.out.println("Returning to sub menu...");
                                         break;
@@ -390,7 +391,7 @@ public class App {
                         break;
                     case 7:
                         BufferedWriter out = new BufferedWriter(new FileWriter(fileName));
-                        for (TaskItem t : list.taskList
+                        for (TaskItem t : tl.taskList
                         ) {
                             out.write(t.toString());
                         }
